@@ -10,7 +10,9 @@ trigger countNumberOfContact on Contact (after insert, after update, after delet
         }
 
         //List<Contact> conList = [Select Id, lastName from Contact Where AccountId IN :listOfAccountId];
-        List<Account> accountList = [Select Id, Number_of_Contacts__c,(Select Id from Contacts) from Account Where Id IN :listOfAccountId];
+        List<Account> accountList = [Select Id, Number_of_Contacts__c,(Select Id from Contacts) 
+                                        from Account 
+                                        Where Id IN :listOfAccountId];
         List<Account> accountToUpdate = new List<Account>();
 
         for(Account acc : accountList){
