@@ -27,7 +27,9 @@ trigger updateParentWithHighestAmountOppName on opportunity (after insert, after
     }
 
     List<Account> accList = [Select Id, Name, Highest_Amount_Opportunity_Name__c, 
-                                (Select AccountId, Amount, Name from opportunities ORDER BY Amount DESC NULLS LAST LIMIT 1) 
+                                (Select AccountId, Amount, Name from opportunities 
+                                ORDER BY Amount DESC NULLS LAST 
+                                LIMIT 1) 
                                 from Account
                                 Where Id IN :accIds];
     List<Account> updateAccount = new List<Account>();
