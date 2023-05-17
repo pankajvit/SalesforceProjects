@@ -9,6 +9,23 @@ trigger updateParentWithHighestAmountOppName on opportunity (after insert, after
         }
     }
 
+    if(Trigger.isAfter && Trigger.isUpdate){
+        for(opportunity opp : Trigger.new){
+            if(opp.AccountId != null && opp.AccountId != Trigger.oldMap.get(opp.Id).AccountId){
+                accIds.add(opp.AccountId);
+                accIds.add(Trigger.oldMap.get(opp.Id).AccountId);
+            }
+        }  
+    }
+
+    if(Trigger.isAfter && Trigger.isDelete){
+        for(opportunity opp : Trigger.old){
+            if(opp.AccountId != null){
+                accIds.add(opp.AccountId);
+            }
+        }
+    }
+
     List<Account> accList = [Select Id, Name, Highest_Amount_Opportunity_Name__c, 
                                 (Select AccountId, Amount, Name from opportunities ORDER BY Amount DESC NULLS LAST LIMIT 1) 
                                 from Account
