@@ -1,4 +1,4 @@
-//Create two record types named as “Partner Case” and “Customer Case” on
+//Asked by Yogesh - Create two record types named as “Partner Case” and “Customer Case” on
 //Case Object. On creation of Case, as per the record type populate the total
 //number of Partner Case or Customer Case on Account object. Create
 //Custom Fields on Account to have total numbers.
