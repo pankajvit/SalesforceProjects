@@ -1,4 +1,4 @@
-// Prevent duplication of Contact records based on Email & Name.
+// Asked by Yogesh - Prevent duplication of Contact records based on Email & Name.
 trigger preventDuplicatoinOfContact on contact (before insert, before update) {
     Map<String, Contact> mapOfEmail = new Map<String, Contact>();
     Map<String, Contact> mapOfName = new Map<String, Contact>();

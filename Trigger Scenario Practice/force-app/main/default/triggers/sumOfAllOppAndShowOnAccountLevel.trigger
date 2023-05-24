@@ -1,4 +1,4 @@
-//When any Opportunity is created with amount populated or Opportunity
+//Asked by Yogesh - When any Opportunity is created with amount populated or Opportunity
 //Amount is updated then populate total Amount on Account Level for all
 //related opportunities in Annual Revenue Field. If opportunity is deleted or
 //undeleted then update Amount on Account as well. (Hint: rollup summary)
