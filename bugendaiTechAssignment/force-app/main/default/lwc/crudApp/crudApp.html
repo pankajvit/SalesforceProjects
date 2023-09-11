@@ -1,0 +1,159 @@
+<template>
+    <div>
+        <div class="slds-align_absolute-center">
+        <lightning-spinner if:false={spinnerStatus} variant="brand" size="medium">
+        </lightning-spinner>
+    </div>
+        <div class="slds-var-m-around_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-var-p-around_medium slds-size_2-of-6">
+                    <div style="background-color: red;padding:10px;text-align:center">
+                        <div class="time">{time}</div> 
+                    </div>
+                </div>
+                <div class="slds-col slds-var-p-around_medium slds-size_3-of-6">
+                    <div style="background-color: pink;padding:10px;text-align:center">
+                        <div class="greet">Hello Everone, {greeting}</div>
+                    </div>
+                </div>
+                <div class="slds-col slds-var-p-around_medium slds-size_1-of-6">
+                    <div style="background-color: red;padding:10px;text-align:center">
+                        <div class="day">{today}</div>
+                    </div>
+                </div>
+            </div>
+             <div class="slds-grid slds-wrap">
+                 <div class="slds-col slds-size_1-of-4 " style="padding:10px;">
+                     <lightning-card title="Fill All Details">                           
+                          <div class="slds-var-m-around_medium">
+                              <!-- <lightning-record-form
+                              object-api-name={objectApiName}
+                              fields={fields}
+                              onsuccess={handleSuccess}
+                              onerror={handleError}
+                              >
+                              </lightning-record-form> -->
+                              <lightning-input type="text" onchange={handleChange} name="name" label="Name" placeholder="Enter Name Here" class="input-space"></lightning-input>
+                              <div class="slds-form-element input-space">
+                                <label class="slds-form-element__label" for="gender">Gender</label>
+                                <div class="slds-form-element__control">
+                                  <div class="slds-select_container">
+                                    <select class="slds-select" onchange={handleChange} name="gender" required="">
+                                      <option value="select">--Select--</option>
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                      <option value="Other">Other</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <lightning-input type="text" label="Subject" onchange={handleChange} name="subject" placeholder="Enter Subject Here" class="input-space"></lightning-input>
+                              <lightning-textarea label="Description" onchange={handleChange} name="description" placeholder="Enter Message Here" class="input-space"></lightning-textarea>
+                              <div class="break" style="text-align:right">
+                                <ul class="slds-button-group-row" style="text-align: end;">
+                                    <li class="slds-button-group-item">
+                                        <button class="slds-button slds-button_outline-brand" onclick={handleCancel}>Cancel</button>
+                                    </li>
+                                    <li class="slds-button-group-item">
+                                        <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+                                    </li>
+                                </ul>
+                              </div>
+                              
+                            </div>
+                     </lightning-card>
+                 </div>
+                 <div class="slds-col slds-size_3-of-4 " style="padding:15px;">
+                     <lightning-card >  
+                        <div class="slds-grid" style="margin-bottom: 15px;justify-content:space-between">
+                            <div class="slds-col slds-size_2-of-6" style="margin-left: 15px;">
+                                <span style="font-size: 14pt;">All Data</span>
+                             </div>  
+                             <div class="slds-col slds-size_2-of-6" style="margin-right: 15px;">
+                               <lightning-input placeholder="Search Here" value={searchKey} onkeyup={handleSearch} type="search"></lightning-input>
+                            </div>                                 
+                        </div>                       
+                        <table class="slds-table slds-table_cell-buffe table ownTable">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th width="5%">#</th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Name">Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Gender">Gender</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Subject">Subject</div>
+                                    </th> 
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Action">Action</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    
+                                <tr for:each={records} for:item="rec" key={index}>
+                                    <td>{rec.SrNo}</td>
+                                    <td><a href={rec.URL} target="_blank">{rec.Name}</a></td>
+                                    <td>{rec.Gender}</td>
+                                    <td>{rec.Subject}</td> 
+                                    <td>
+                                        <lightning-button-icon variant="brand" onclick={showEditModal}
+                                            icon-name="utility:edit" data-id={rec.Id}
+                                            alternative-text="Edit" title="Edit" style="margin-right:5px">
+                                        </lightning-button-icon>
+                    
+                                        <lightning-button-icon variant="brand" onclick={deleteRecord}
+                                            data-id={rec.Id} icon-name="utility:delete" alternative-text="Delete"
+                                            title="Delete" style="margin-left:5px;margin-right:5px">
+                                        </lightning-button-icon>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                     </lightning-card>
+                 </div>
+             </div>
+        </div>
+    </div>    
+
+
+    
+    <!-- edit modal start -->
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class={modalClassAss}>
+        <div class="slds-modal__container">
+
+            <div class="slds-modal__header">
+                <h4 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Job Assignment</h4>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                style="padding-top:20px;padding-bottom:80px; height:250px;">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="4">
+                        <lightning-input class="slds-m_right-medium heading-class" placeholder="Job Name"
+                            type="text" label="Job Name" value="" data-field="JobName1" read-only="">
+                        </lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="2"></lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <lightning-input class="slds-m_right-medium heading-class" placeholder="Job Name"
+                            type="text" label="Job Name" value="" data-field="JobName2" read-only="">
+                        </lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+            </div>
+            <div class="slds-modal__footer">
+                <lightning-button label="Close" title="Non-primary action" onclick={closeEditModal}
+                    class="slds-m-left_x-small"></lightning-button>
+                <lightning-button label="Save" variant="brand" data-id={selectedJobId} title="Non-primary action"
+                    onclick={saveAssignment} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </section>
+    <div class={modalBackdropClassAss} role="presentation"></div>
+
+    <!-- edit modal end -->
+</template>

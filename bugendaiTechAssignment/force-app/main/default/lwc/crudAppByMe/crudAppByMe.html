@@ -1,0 +1,64 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-12 form-section">
+            <lightning-card>
+                <div class="slds-var-m-around_medium">
+                    <h1 class="slds-text-heading_small">Fill All Details</h1>
+                </div>
+                <div class="slds-var-m-around_medium">
+                    <lightning-input type="text" name="name" label="Name" onchange={handleChange}></lightning-input>
+                </div>
+                <div class="slds-var-m-around_medium">
+                    <lightning-combobox name="gender" label="Status" value={description} placeholder="Select Gender"
+                        options={options} onchange={handleChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-var-m-around_medium">
+                    <lightning-input type="text" name="subject" label="Subject"
+                        onchange={handleChange}></lightning-input>
+                </div>
+                <div class="slds-var-m-around_medium">
+                    <lightning-textarea name="desc" label="Description" onchange={handleChange}></lightning-textarea>
+                </div>
+                <div class="slds-m-left_xx-large">
+                    <lightning-button label="Cancel" title="Cancel" onclick={handleCancel}
+                        class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSubmit}
+                        class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </lightning-card>
+        </div>
+        <div class="slds-col slds-size_7-of-12">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                aria-label="Example table of Opportunities with vertical borders">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="slds-hint-parent" for:each={records} for:item="rec" key={index}>
+                        <td>{rec.number}</td>
+                        <td><a href={rec.URL} target="_blank">{rec.Name}</a></td>
+                        <td>{rec.Gender__c}</td>
+                        <td>{rec.Subject__c}</td>
+                        <td>
+                            <lightning-button-icon variant="brand" onclick={showEditModal} icon-name="utility:edit"
+                                data-id={rec.Id} alternative-text="Edit" title="Edit" style="margin-right:5px">
+                            </lightning-button-icon>
+
+                            <lightning-button-icon variant="brand" onclick={deleteRecord} data-id={rec.Id}
+                                icon-name="utility:delete" alternative-text="Delete" title="Delete"
+                                style="margin-left:5px;margin-right:5px">
+                            </lightning-button-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
