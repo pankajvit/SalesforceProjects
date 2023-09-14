@@ -1,4 +1,4 @@
-// When a case is inserted on any Account, Put the latest Case Number on the Account 
+// Question - 12 by SFDCNinja - When a case is inserted on any Account, Put the latest Case Number on the Account 
 // in Latest Case Inserted field.
 trigger Question_12_OnCaseBySFDCNinja on Case (after insert) {
     Set<Id> accIds = new Set<Id>();
