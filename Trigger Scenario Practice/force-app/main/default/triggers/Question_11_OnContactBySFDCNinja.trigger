@@ -1,4 +1,4 @@
-// Trigger to show an Error if there are already two contacts present on an Account 
+// Question - 11 by SFDC Ninja - Trigger to show an Error if there are already two contacts present on an Account 
 // and the user tries to add one more contact on it.
 trigger Question_11_OnContactBySFDCNinja on Contact (before insert, before update, after undelete) {
     Set<Id> accIds = new Set<Id>();
