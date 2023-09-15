@@ -1,4 +1,4 @@
-// Write a trigger on the Account when the Account is updated check all opportunities related to the account. Update all Opportunities stage to close lost if an opportunity created date is greater than 30 days from today and stage not equal to close won.
+// Question-9: Write a trigger on the Account when the Account is updated check all opportunities related to the account. Update all Opportunities stage to close lost if an opportunity created date is greater than 30 days from today and stage not equal to close won.
 trigger Question_9_OnAccBySFDCNinja on Account (after update) {
     Set<Id> accIds = new Set<Id>();
     if(Trigger.isAfter && Trigger.isUpdate){
