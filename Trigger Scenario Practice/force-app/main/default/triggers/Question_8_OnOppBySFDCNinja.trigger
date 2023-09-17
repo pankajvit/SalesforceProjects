@@ -1,4 +1,4 @@
-// Trigger to find sum of all related Opportunities Amount of an Account.
+// Question-8:Trigger to find sum of all related Opportunities Amount of an Account.
 trigger Question_8_OnOppBySFDCNinja on Opportunity (after insert, after update, after delete, after undelete) {
     Set<Id> accIds = new Set<Id>();
     if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUndelete)){
