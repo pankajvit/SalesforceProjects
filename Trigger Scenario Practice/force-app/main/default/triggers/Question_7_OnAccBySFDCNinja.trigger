@@ -1,4 +1,4 @@
-// Trigger to create a related Contact of Account with same phone as Account’s phone 
+// Question_7: Trigger to create a related Contact of Account with same phone as Account’s phone 
 // if custom checkbox field on Account is checked
 trigger Question_7_OnAccBySFDCNinja on Account (after insert, after update) {
     Set<Id> accIds = new Set<Id>();
