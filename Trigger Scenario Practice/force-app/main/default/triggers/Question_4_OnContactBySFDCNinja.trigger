@@ -1,4 +1,4 @@
-// Whenever a Contact’s description is updated 
+// Question - 4: Whenever a Contact’s description is updated 
 // then its Parent Account’s description should also get updated by it
 trigger Question_4_OnContactBySFDCNinja on Contact (after update) {
     Set<Id> accIds = new Set<Id>();
