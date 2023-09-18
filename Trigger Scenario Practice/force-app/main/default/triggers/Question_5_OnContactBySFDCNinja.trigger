@@ -1,4 +1,4 @@
-// Trigger to count number of contacts associated with an account 
+// Question - 5: Trigger to count number of contacts associated with an account 
 // and display the contacts count on Account’s custom field
 trigger Question_5_OnContactBySFDCNinja on Contact (after insert, after update, after delete, after undelete) {
     Set<Id> accIds = new Set<Id>();
