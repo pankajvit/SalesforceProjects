@@ -6,7 +6,20 @@ public with sharing class PdfGenerator {
 
 	@AuraEnabled
 	public static List<Project_scope__c> getRelatedTaskToSowData(Id sowId){
-		system.debug('SOW Id: ' +sowId);
-		return [SELECT Scope_of_Work__c, Task_List__r.Name, Task_List__r.Estimated_Hour__c, Description__c FROM Project_scope__c Where Scope_of_Work__c = :sowId];
+		//system.debug('SOW Id: ' +sowId);
+		return [SELECT Id, Scope_of_Work__c, Task_List__r.Name, Task_List__r.Estimated_Hour__c, Description__c FROM Project_scope__c Where Scope_of_Work__c = :sowId];
+	}
+
+	@AuraEnabled
+	public static List<Contact> getContactsController(){
+		return [SELECT Id, FirstName, LastName FROM Contact LIMIT 100];
 	}
 }
+
+
+// changed following data
+// return type - List<Project_scope__c>
+// parameter - Id sowId
+// SELECT Id, Scope_of_Work__c, Task_List__r.Name FROM Project_scope__c
+// Task_List__r.Estimated_Hour__c, Description__c
+// Where Scope_of_Work__c = :sowId
